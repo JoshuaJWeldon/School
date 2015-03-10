@@ -1,5 +1,3 @@
-package ics;
-
 /**
  * This class represents an event for Calendar files.
  * The data conforms to the iCalendar standard.
