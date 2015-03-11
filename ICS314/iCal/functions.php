@@ -24,7 +24,7 @@
                 }  
                 
                 if (!preg_match("/^[a-zA-Z0-9 ]*$/",$event)) {
-                    $eventErr = "Only letters and white space allowed"; 
+                    $eventErr = "Only letters, digits, and spaces are allowed"; 
                 }
                  	
                 unset($_POST["event"]);
@@ -39,7 +39,7 @@
                 $location = test_input($_POST["location"]); 
                 
                 if (!preg_match("/^[a-zA-Z0-9 ]*$/",$location)) {
-                    $locationErr = "Only letters and white space allowed"; 
+                    $locationErr = "Only letters, digits, and spaces are allowed"; 
                 }
                  	
                 unset($_POST["location"]);
@@ -57,18 +57,34 @@
         global $icsText, $icsTextErr, $isValid;
         global $event, $location, $starttime, $endtime, $priority, $type;
         
-        if(true):?>
+        if(!empty($event)):
+        ?>
+    
+            <p> Event: <?php echo $event; ?> </p>
+            <p> Location: <?php echo $location; ?> </p>
+            <p> Time: <?php echo $starttime; ?> </p>
+            <p> Time: <?php echo $endtime; ?> </p>
+            <p> Priority: <?php echo $priority; ?> </p>
+            <p> Type: <?php echo $type; ?> </p>
         
-            <p> <?php echo $event; ?> </p>
-            <p> <?php echo $location; ?> </p>
-            <p> <?php echo $starttime; ?> </p>
-            <p> <?php echo $endtime; ?> </p>
-            <p> <?php echo $priority; ?> </p>
-            <p> <?php echo $type; ?> </p>
-        
+            <form>
+                <input type="button" value="export" name="export">
+            </form>
+            
         <?php endif;
+            
+        //!TODO: parse data into icsFormate
+        
+        $icsText = $icsText . $event . " " . $location;
+        echo $icsText;
         
     }  
+    
+    function export(){
+        
+        //!TODO: export icstest
+        
+    }
     
     function test_input($data) {
         $data = trim($data);

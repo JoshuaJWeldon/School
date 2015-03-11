@@ -1,3 +1,14 @@
+/* !TODO: Make pretty */
+
 .error {
     color: #FF0000;
+}
+
+p{
+    color: gray;
+    background-color: green;
+}
+
+h1{
+    background-color: gray;
 }

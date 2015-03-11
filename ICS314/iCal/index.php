@@ -10,7 +10,7 @@
 <body>
         
     <?php checkInputErrors(); ?>
-    <h1>iCal</h1>
+    <h1> iCal </h1>
     
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         New Event:
@@ -41,13 +41,11 @@
             <input type="radio" name="e_type" value="private">pm 
                 <span class="error"> * <?php echo $timeErr; ?></span>
         <br>
-        Priority: <input type="radio" name="priority" value="low" checked> low
-                  <input type="radio" name="priority" value="medium"> medium
-                  <input type="radio" name="priority" value="high"> high
+        Priority: 1 <input type="range" min="1" max="9"> 9
         <br>
-        Type: <input type="radio" name="type" value="public" checked> public
-              <input type="radio" name="type" value="private"> private
-              <input type="radio" name="type" value="confidential"> confidential
+        Type: <input type="radio" name="class" value="public" checked> public
+              <input type="radio" name="class" value="private"> private
+              <input type="radio" name="class" value="confidential"> confidential
         <br> 
         <input type="submit" name="button" value="generate">            
     </form>
