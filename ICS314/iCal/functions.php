@@ -3,34 +3,35 @@
     $icsTextErr = "";
     $isValid = false;
     
-    $event = $location = $starttime = $endtime = $priority = $type = "";
-    $eventErr = $locationErr = $timeErr = $priorityErr = $typeErr = "";
+    $summery = $location = $starttime = $endtime = $priority = $class = "";
+    $summeryErr = $locationErr = $timeErr = $priorityErr = $classErr = "";
 
     function checkInputErrors(){
 
         global $_SERVER, $_POST, $icsText, $icsTextErr, $isValid;
-        global $event, $location, $starttime, $endtime, $priority, $type;
-        global $eventErr, $locationErr, $timeErr, $priorityErr, $typeErr;
+        global $summery, $location, $starttime, $endtime, $priority, $class;
+        global $summeryErr, $locationErr, $timeErr, $priorityErr, $classErr;
        
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
                  
-            //test event
-            if (!empty($_POST["event"])) {
+            //test summery
+            if (!empty($_POST["summery"])) {
   
-                $event = test_input($_POST["event"]);
+                $summery = test_input($_POST["summery"]);
 
-                if(empty($event)){
-                    $eventErr = "You must have an event name";
+                if(empty($summery)){
+                    $summeryErr = "You must have an event name";
                 }  
                 
-                if (!preg_match("/^[a-zA-Z0-9 ]*$/",$event)) {
-                    $eventErr = "Only letters, digits, and spaces are allowed"; 
+                if (!preg_match("/^[a-zA-Z0-9 ]*$/",$summery)) {
+                    $summery = "";
+                    $summeryErr = "Only letters, digits, and spaces are allowed"; 
                 }
                  	
-                unset($_POST["event"]);
+                unset($_POST["summery"]);
             }
             else{
-                $eventErr = "You must have an event name";
+                $summeryErr = "You must have an event name";
             }
 
             //test location
@@ -39,13 +40,106 @@
                 $location = test_input($_POST["location"]); 
                 
                 if (!preg_match("/^[a-zA-Z0-9 ]*$/",$location)) {
+                    $location = "";
                     $locationErr = "Only letters, digits, and spaces are allowed"; 
                 }
                  	
                 unset($_POST["location"]);
             }
             
-            //test date and time
+            //test starttime
+            if(!checkdate($_POST["s_month"], $_POST["s_day"], $_POST["s_year"]) && $_POST["s_year"] < 2015 && !checktime($_POST["s_hour"], $_POST["s_min"])){
+                $timeErr = "<br> You must enter in a valid future date";
+            }
+            else{
+                
+                //year
+                $starttime = $starttime . $_POST["s_year"];
+                
+                //month
+                if($_POST["s_month"] < 10){
+                    $starttime = $starttime . "0";
+                }
+                
+                $starttime = $starttime . $_POST["s_month"]; 
+                
+                //day
+                if($_POST["s_day"] < 10){
+                    $starttime = $starttime . "0";
+                }
+                
+                $starttime = $starttime . $_POST["s_day"] . "T";
+                
+                //hour
+                if($_POST["s_midday"] == "pm"){
+                    $_POST["s_hour"] += 12;
+                }
+                
+                if($_POST["s_hour"] < 10){
+                    $starttime = $starttime . "0";
+                }
+                
+                $starttime = $starttime . $_POST["s_hour"];
+                
+                //min
+                if($_POST["s_min"] < 10){
+                    $starttime = $starttime . "0";
+                }
+                
+                $starttime = $starttime . $_POST["s_min"] . "00Z";
+            }
+            
+            //test endtime
+            
+            if(!checkdate($_POST["e_month"], $_POST["e_day"], $_POST["e_year"]) && $_POST["e_year"] < 2015){
+                $timeErr = "<br> You must enter in a valid future date";
+            }
+            else{
+                //year
+                $endtime = $endtime . $_POST["e_year"];
+                
+                //month
+                if($_POST["e_month"] < 10){
+                    $endtime = $endtime . "0";
+                }
+                
+                $endtime = $endtime . $_POST["e_month"]; 
+                
+                //day
+                if($_POST["e_day"] < 10){
+                    $endtime = $endtime . "0";
+                }
+                
+                $endtime = $endtime . $_POST["e_day"] . "T";
+                
+                //hour
+                if($_POST["e_midday"] == "pm"){
+                    $_POST["e_hour"] += 12;
+                }
+                
+                if($_POST["e_hour"] < 10){
+                    $endtime = $endtime . "0";
+                }
+                
+                $endtime = $endtime . $_POST["e_hour"];
+                
+                //min
+                if($_POST["e_min"] < 10){
+                    $endtime = $endtime . "0";
+                }
+                
+                $endtime = $endtime . $_POST["e_min"] . "00Z";
+            }
+                       
+            // save priority
+            
+            $priority = $_POST["priority"];
+            
+            // save class
+            
+            $class = $_POST["class"];
+            
+            //test
               
                      
             $_SERVER["REQUEST_METHOD"] = "";       
@@ -55,27 +149,47 @@
     function generateIcsText(){
         
         global $icsText, $icsTextErr, $isValid;
-        global $event, $location, $starttime, $endtime, $priority, $type;
+        global $summery, $location, $starttime, $endtime, $priority, $class;
         
-        if(!empty($event)):
-        ?>
-    
-            <p> Event: <?php echo $event; ?> </p>
-            <p> Location: <?php echo $location; ?> </p>
+        if(!empty($summery)): ?>
+            
+            <p> Summery: <?php echo $summery; ?> </p>
+            
+            <?php if(!empty($location)): ?>
+        
+                <p> Location: <?php echo $location; ?> </p>
+        
+            <?php endif; ?>
+            
             <p> Time: <?php echo $starttime; ?> </p>
             <p> Time: <?php echo $endtime; ?> </p>
             <p> Priority: <?php echo $priority; ?> </p>
-            <p> Type: <?php echo $type; ?> </p>
-        
+            <p> Class: <?php echo $class; ?> </p>
+            
             <form>
                 <input type="button" value="export" name="export">
             </form>
-            
+        
         <?php endif;
             
+<<<<<<< Updated upstream
         //!TODO: Need way to add time zone in form. Also need to get time into correct format.
         //Date/Time format is: YYYYMMDDTHHMMSSZ  Not sure what the T or Z represent
         //Time must be in Greenwich Mean Time (GMT) which is 10 ahead of Hawaii
+=======
+<<<<<<< HEAD
+        
+            
+        //!TODO: parse data into icsFormate
+        
+        $icsText = $icsText . $summery . " " . $location;
+        //echo $icsText;
+=======
+        //!TODO: Need way to add time zone in form. Also need to get time into correct format.
+        //Date/Time format is: YYYYMMDDTHHMMSSZ  Not sure what the T or Z represent
+        //Time must be in Greenwich Mean Time (GMT) which is 10 ahead of Hawaii
+>>>>>>> origin/master
+>>>>>>> Stashed changes
         
         $icsText = "BEGIN:VCALENDAR\nX-WR-TIMEZONE:" . $timezone . "\nBEGIN:VEVENT\nVERSION:2.0\nCLASS:"
         			. $priority . "\nLOCATION:" . $location . "\nPRIORITY:" . $priority
@@ -95,7 +209,19 @@
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
         return $data;
-    }   
+    }
+    
+    function checktime($hour, $min) {
+        if ($hour < 1 || $hour > 12 || !is_numeric($hour)) {
+            return false;
+        }
+        if ($min < 0 || $min > 59 || !is_numeric($min)) {
+            return false;
+        }
+ 
+        return true;
+    }
+    
   
 ?>
     

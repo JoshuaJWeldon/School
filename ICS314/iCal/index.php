@@ -14,34 +14,34 @@
     
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         New Event:
-        <input type="text" name="event"> 
-            <span class="error"> * <?php echo $eventErr; ?></span>
+        <input type="text" name="summery"> 
+            <span class="error"> * <?php echo $summeryErr; ?></span>
         <br> 
         Location:
             <input type="text" name="location">
                 <span class="error"> <?php echo $locationErr; ?></span>
         <br>
         StartTime: 
-            <input type="number" value="s_month" min="1" max="12" placeholder="1" >/
-            <input type="number" value="s_day" min="1" max="31" placeholder="1">/
-            <input type="number" value="s_year" min="2015" max="2017" placeholder="2015"> 
-            <input type="number" value="s_hour" min="1" max="12" placeholder="1" >:
-            <input type="number" value="s_month" min="0" max="59" placeholder="30" >
-            <input type="radio" name="s_midday" value="public" checked>am
-            <input type="radio" name="s_type" value="private">pm 
-                <span class="error"> * <?php echo $timeErr; ?></span>
+            <input type="number" name="s_month" min="1"    max="12"   value="1" >/
+            <input type="number" name="s_day"   min="1"    max="31"   value="21">/
+            <input type="number" name="s_year"  min="2015" max="2017" value="2015"> 
+            <input type="number" name="s_hour"  min="1"    max="12"   value="2" >:
+            <input type="number" name="s_min"   min="0"    max="59"   value="30" >
+            <input type="radio" name="s_midday" value="am" checked>am
+            <input type="radio" name="s_midday" value="pm">pm 
+                <span class="error"> * </span>
         <br>
         EndTime: 
-            <input type="number" value="e_month" min="1" max="12" placeholder="1" >/
-            <input type="number" value="e_day" min="1" max="31" placeholder="1">/
-            <input type="number" value="e_year" min="2015" max="2017" placeholder="2015"> 
-            <input type="number" value="e_hour" min="1" max="12" placeholder="1" >:
-            <input type="number" value="e_month" min="0" max="59" placeholder="30" >
-            <input type="radio" name="e_midday" value="public" checked>am
-            <input type="radio" name="e_type" value="private">pm 
+            <input type="number" name="e_month" min="1"    max="12"   value="1" >/
+            <input type="number" name="e_day"   min="1"    max="31"   value="21">/
+            <input type="number" name="e_year"  min="2015" max="2017" value="2015"> 
+            <input type="number" name="e_hour"  min="1"    max="12"   value="3" >:
+            <input type="number" name="e_min"   min="0"    max="59"   value="30" >
+            <input type="radio" name="e_midday" value="am" checked>am
+            <input type="radio" name="e_midday" value="pm">pm 
                 <span class="error"> * <?php echo $timeErr; ?></span>
         <br>
-        Priority: 1 <input type="range" min="1" max="9"> 9
+        Priority: 1 <input type="range" name="priority" min="1" max="9"> 9
         <br>
         Type: <input type="radio" name="class" value="public" checked> public
               <input type="radio" name="class" value="private"> private
@@ -52,6 +52,15 @@
 
     <p><?php generateIcsText(); ?></p>
            
+           
+           
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p> * Please use Safari or Chrome as your browser for best results </p>
 </body>
 
 </html>
