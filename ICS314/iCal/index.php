@@ -43,9 +43,9 @@
         <br>
         Priority: 1 <input type="range" name="priority" min="1" max="9"> 9
         <br>
-        Type: <input type="radio" name="class" value="public" checked> public
-              <input type="radio" name="class" value="private"> private
-              <input type="radio" name="class" value="confidential"> confidential
+        Type: <input type="radio" name="class" value="PUBLIC" checked> public
+              <input type="radio" name="class" value="PRIVATE"> private
+              <input type="radio" name="class" value="CONFIDENTIAL"> confidential
         <br> 
         <input type="submit" name="button" value="generate">            
     </form>

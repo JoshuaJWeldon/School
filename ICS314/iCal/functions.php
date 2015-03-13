@@ -151,9 +151,10 @@
         global $icsText, $icsTextErr, $isValid;
         global $summery, $location, $starttime, $endtime, $priority, $class;
         
+        
         if(!empty($summery)): ?>
             
-            <p> Summery: <?php echo $summery; ?> </p>
+            <p> Event Name: <?php echo $summery; ?> </p>
             
             <?php if(!empty($location)): ?>
         
@@ -161,20 +162,39 @@
         
             <?php endif; ?>
             
-            <p> Time: <?php echo $starttime; ?> </p>
-            <p> Time: <?php echo $endtime; ?> </p>
+            <p> Start Time: <?php echo $starttime; ?> </p>
+            <p> End Time: <?php echo $endtime; ?> </p>
             <p> Priority: <?php echo $priority; ?> </p>
             <p> Class: <?php echo $class; ?> </p>
             
             <br>
             <br>
             <br>
+   
+   
+            <p>ICS FILE:</p>
+            <p>BEGIN:VCALENDAR<br>
+            VERSION:2.0<br>
+            BEGIN:VEVENT<br>
+            DTSTART;TZID=Pacific/Honolulu:<?php echo $starttime; ?><br>
+            DTEND;TZID=Pacific/Honolulu:<?php echo $endtime; ?><br>
+            CLASS:<?php echo $class; ?><br>
+            LOCATION:<?php echo $location; ?><br>
+            SUMMARY:<?php echo  $summery; ?><br>
+            PRIORITY:<?php echo $priority;?><br>
+            END:VEVENT<br>
+            END:VCALENDAR</p>
+            <br>
+            <br>
+            <br>
+            
+            
             
             <?php
             
                 $icsText = "BEGIN:VCALENDAR\nX-WR-TIMEZONE:" . $timezone . "\nBEGIN:VEVENT\nVERSION:2.0\nCLASS:"
         			. $priority . "\nLOCATION:" . $location . "\nPRIORITY:" . $priority
-					. "\nSUMMARY:" . $event . "\nDTSTART:" . $starttime . "\nDTEND:" . $endtime .
+					. "\nSUMMARY:" . $summery . "\nDTSTART:" . $starttime . "\nDTEND:" . $endtime .
 					"\nEND:VEVENT\nEND:VCALENDAR";
         
                 echo $icsText;
