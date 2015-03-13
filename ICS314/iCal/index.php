@@ -50,7 +50,10 @@
         <input type="submit" name="button" value="generate">            
     </form>
 
-    <p><?php generateIcsText(); ?></p>
+    <?php generateIcsText(); ?>
+    
+    
+    <?php //!TODO: exportIcsText(); ?>
            
            
            

@@ -41,6 +41,7 @@
                 
                 if (!preg_match("/^[a-zA-Z0-9 ]*$/",$location)) {
                     $location = "";
+                    $summery = "";
                     $locationErr = "Only letters, digits, and spaces are allowed"; 
                 }
                  	
@@ -50,6 +51,7 @@
             //test starttime
             if(!checkdate($_POST["s_month"], $_POST["s_day"], $_POST["s_year"]) && $_POST["s_year"] < 2015 && !checktime($_POST["s_hour"], $_POST["s_min"])){
                 $timeErr = "<br> You must enter in a valid future date";
+                $summery = "";
             }
             else{
                 
@@ -93,6 +95,7 @@
             
             if(!checkdate($_POST["e_month"], $_POST["e_day"], $_POST["e_year"]) && $_POST["e_year"] < 2015){
                 $timeErr = "<br> You must enter in a valid future date";
+                $summery = "";
             }
             else{
                 //year
@@ -179,7 +182,9 @@
             DTSTART;TZID=Pacific/Honolulu:<?php echo $starttime; ?><br>
             DTEND;TZID=Pacific/Honolulu:<?php echo $endtime; ?><br>
             CLASS:<?php echo $class; ?><br>
-            LOCATION:<?php echo $location; ?><br>
+            <?php if(!empty($location)): ?>
+                LOCATION:<?php echo $location; ?><br>
+            <?php endif; ?>
             SUMMARY:<?php echo  $summery; ?><br>
             PRIORITY:<?php echo $priority;?><br>
             END:VEVENT<br>
@@ -191,28 +196,29 @@
             
             
             <?php
-            
+                //!FIXME: mock above
                 $icsText = "BEGIN:VCALENDAR\nX-WR-TIMEZONE:" . $timezone . "\nBEGIN:VEVENT\nVERSION:2.0\nCLASS:"
         			. $priority . "\nLOCATION:" . $location . "\nPRIORITY:" . $priority
 					. "\nSUMMARY:" . $summery . "\nDTSTART:" . $starttime . "\nDTEND:" . $endtime .
 					"\nEND:VEVENT\nEND:VCALENDAR";
-        
-                echo $icsText;
             
             ?>
             
-            <form>
-                <input type="button" value="export" name="export">
-            </form>
+          
         
         <?php endif;
         
     }  
     
-    function export(){
+    function exportIcsText(){
+        //!TODO: write export
         
-        //!TODO: export icstest
+        ?>
+            <form>
+                <input type="button" value="export" name="export">
+            </form>
         
+        <?php
     }
     
     function test_input($data) {
