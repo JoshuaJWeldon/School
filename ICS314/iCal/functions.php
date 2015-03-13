@@ -172,30 +172,12 @@
         
         <?php endif;
             
-<<<<<<< Updated upstream
-        //!TODO: Need way to add time zone in form. Also need to get time into correct format.
-        //Date/Time format is: YYYYMMDDTHHMMSSZ  Not sure what the T or Z represent
-        //Time must be in Greenwich Mean Time (GMT) which is 10 ahead of Hawaii
-=======
-<<<<<<< HEAD
-        
-            
-        //!TODO: parse data into icsFormate
-        
-        $icsText = $icsText . $summery . " " . $location;
-        //echo $icsText;
-=======
-        //!TODO: Need way to add time zone in form. Also need to get time into correct format.
-        //Date/Time format is: YYYYMMDDTHHMMSSZ  Not sure what the T or Z represent
-        //Time must be in Greenwich Mean Time (GMT) which is 10 ahead of Hawaii
->>>>>>> origin/master
->>>>>>> Stashed changes
-        
         $icsText = "BEGIN:VCALENDAR\nX-WR-TIMEZONE:" . $timezone . "\nBEGIN:VEVENT\nVERSION:2.0\nCLASS:"
         			. $priority . "\nLOCATION:" . $location . "\nPRIORITY:" . $priority
 					. "\nSUMMARY:" . $event . "\nDTSTART:" . $starttime . "\nDTEND:" . $endtime .
 					"\nEND:VEVENT\nEND:VCALENDAR";
         echo($icsText);
+        
     }  
     
     function export(){
