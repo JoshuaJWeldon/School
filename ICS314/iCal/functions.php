@@ -49,7 +49,7 @@
             }
             
             //test starttime
-            if(!checkdate($_POST["s_month"], $_POST["s_day"], $_POST["s_year"]) && $_POST["s_year"] < 2015 && !checktime($_POST["s_hour"], $_POST["s_min"])){
+            if(!checkdate($_POST["s_month"], $_POST["s_day"], $_POST["s_year"]) || $_POST["s_year"] < 2015 || !checktime($_POST["s_hour"], $_POST["s_min"])){
                 $timeErr = "<br> You must enter in a valid future date";
                 $summery = "";
             }
@@ -93,7 +93,7 @@
             
             //test endtime
             
-            if(!checkdate($_POST["e_month"], $_POST["e_day"], $_POST["e_year"]) && $_POST["e_year"] < 2015){
+            if(!checkdate($_POST["e_month"], $_POST["e_day"], $_POST["e_year"]) || $_POST["e_year"] < 2015 || !checktime($_POST["e_hour"], $_POST["e_min"])){
                 $timeErr = "<br> You must enter in a valid future date";
                 $summery = "";
             }
@@ -157,14 +157,14 @@
         
         if(!empty($summery)): ?>
             
+            <br>
+            <br>
+            <br>
+            
             <p> Event Name: <?php echo $summery; ?> </p>
-            
             <?php if(!empty($location)): ?>
-        
                 <p> Location: <?php echo $location; ?> </p>
-        
             <?php endif; ?>
-            
             <p> Start Time: <?php echo $starttime; ?> </p>
             <p> End Time: <?php echo $endtime; ?> </p>
             <p> Priority: <?php echo $priority; ?> </p>
