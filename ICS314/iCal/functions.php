@@ -86,7 +86,7 @@
                     $starttime = $starttime . "0";
                 }
                 
-                $starttime = $starttime . $_POST["s_min"] . "00Z";
+                $starttime = $starttime . $_POST["s_min"] . "00";
             }
             
             //test endtime
@@ -128,7 +128,7 @@
                     $endtime = $endtime . "0";
                 }
                 
-                $endtime = $endtime . $_POST["e_min"] . "00Z";
+                $endtime = $endtime . $_POST["e_min"] . "00";
             }
                        
             // save priority
