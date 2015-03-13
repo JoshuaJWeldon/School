@@ -196,15 +196,22 @@
             
             
             <?php
-                //!FIXME: mock above
-                $icsText = "BEGIN:VCALENDAR\nX-WR-TIMEZONE:" . $timezone . "\nBEGIN:VEVENT\nVERSION:2.0\nCLASS:"
-        			. $priority . "\nLOCATION:" . $location . "\nPRIORITY:" . $priority
-					. "\nSUMMARY:" . $summery . "\nDTSTART:" . $starttime . "\nDTEND:" . $endtime .
-					"\nEND:VEVENT\nEND:VCALENDAR";
+                
+                $icsText = "BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART;TZID=Pacific/Honolulu:$starttime\nDTEND;TZID=Pacific/Honolulu:$endtime\nCLASS:$class\n";
+            
+            if(!empty($location)){
+                $icsText = $icsText . "LOCATION:$location\n";
+            }
+            
+            $icsText = $icsText . "SUMMARY:$summery\nPRIORITY:$priority\nEND:VEVENT\nEND:VCALENDAR";
+                
+            $file = fopen("file.ics", "w");
+            fwrite($file, $icsText);
+            fclose($file);
             
             ?>
             
-          
+            <p><a href="file.ics"> file.ics </a></p>
         
         <?php endif;
         
