@@ -13,7 +13,6 @@
     <div class="header"> 
         <h1> iCal </h1>
     </div>
-    
     <div class="body">
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             New Event:
@@ -60,8 +59,6 @@
     
     
         <?php //!TODO: exportIcsText(); ?>
-           
-           
            
         <br>
         <br>

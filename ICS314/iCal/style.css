@@ -1,14 +1,24 @@
 div.header {
 	padding: 0.005em;
     color: white;
-    background-color: red;
+    background-color: #0069b9;
     text-align: center;
 }
 
+body{
+    background-size: 100%;
+}
+
 div.body {
+    background-image: url("Background.jpg");
+    background-attachment: fixed;
+    background-size: 100%;
     margin-left: 25px;
 	margin-bottom: 20px;
+	font-size: 20;
+	font-weight: bold;
 }
+
 div.footer {
 	padding: 0.005em;
 	color:black;
@@ -49,9 +59,9 @@ input[type="range"] {
 }
 
 input[type="submit"] {
-	border: 2px solid red;
+	border: 2px solid #0069b9;
     padding: 5px 5px; 
-    background: red;
+    background: #0069b9;
     width: 80px;
     border-radius: 50px;
     color: white;
@@ -59,9 +69,9 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-	border: 2px solid #800000;
+	border: 2px solid #004b83;
     padding: 5px 5px; 
-    background: #800000;
+    background: #005da4;
     width: 80px;
     border-radius: 50px;
     color: white;
