@@ -166,17 +166,26 @@
             <p> Priority: <?php echo $priority; ?> </p>
             <p> Class: <?php echo $class; ?> </p>
             
+            <br>
+            <br>
+            <br>
+            
+            <?php
+            
+                $icsText = "BEGIN:VCALENDAR\nX-WR-TIMEZONE:" . $timezone . "\nBEGIN:VEVENT\nVERSION:2.0\nCLASS:"
+        			. $priority . "\nLOCATION:" . $location . "\nPRIORITY:" . $priority
+					. "\nSUMMARY:" . $event . "\nDTSTART:" . $starttime . "\nDTEND:" . $endtime .
+					"\nEND:VEVENT\nEND:VCALENDAR";
+        
+                echo $icsText;
+            
+            ?>
+            
             <form>
                 <input type="button" value="export" name="export">
             </form>
         
         <?php endif;
-            
-        $icsText = "BEGIN:VCALENDAR\nX-WR-TIMEZONE:" . $timezone . "\nBEGIN:VEVENT\nVERSION:2.0\nCLASS:"
-        			. $priority . "\nLOCATION:" . $location . "\nPRIORITY:" . $priority
-					. "\nSUMMARY:" . $event . "\nDTSTART:" . $starttime . "\nDTEND:" . $endtime .
-					"\nEND:VEVENT\nEND:VCALENDAR";
-        echo($icsText);
         
     }  
     
