@@ -1,4 +1,4 @@
-Open the eclipse workspace, wit the directory:
+#iCalendar Web Project
 
-    School->ICS314->eclipse->workspace
-    
+Use this web iCal, to create and export .ics files.
+

@@ -175,7 +175,7 @@
             <br>
    
    
-            <p>ICS FILE:</p>
+            <p>ICS FILE: <a href="file.ics"> file.ics </a></p>
             <p>BEGIN:VCALENDAR<br>
             VERSION:2.0<br>
             BEGIN:VEVENT<br>
@@ -189,11 +189,6 @@
             PRIORITY:<?php echo $priority;?><br>
             END:VEVENT<br>
             END:VCALENDAR</p>
-            <br>
-            <br>
-            <br>
-            
-            
             
             <?php
                 
@@ -210,8 +205,6 @@
             fclose($file);
             
             ?>
-            
-            <p><a href="file.ics"> file.ics </a></p>
         
         <?php endif;
         

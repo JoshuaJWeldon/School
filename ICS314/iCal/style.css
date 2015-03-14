@@ -6,13 +6,12 @@ div.header {
 }
 
 body{
+    background-image: url("Background.jpg");
+    background-attachment: fixed;
     background-size: 100%;
 }
 
 div.body {
-    background-image: url("Background.jpg");
-    background-attachment: fixed;
-    background-size: 100%;
     margin-left: 25px;
 	margin-bottom: 20px;
 	font-size: 20;
