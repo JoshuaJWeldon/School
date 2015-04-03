@@ -49,8 +49,11 @@
             </div>
             <div class="bodypart">
             	Priority: 
-                1 <input type="range" name="priority" min="1" max="9"> 9
-            </div>
+            	<form>
+    				<input type="range" name="amountRange" min="1" max="9" value="0" oninput="this.form.amountInput.value=this.value" />
+    				<input type="number" name="amountInput" min="1" max="9" value="0" oninput="this.form.amountRange.value=this.value" />
+    			</form>
+    		</div>
             <div class="bodypart">
             	Type: <input type="radio" name="class" value="PUBLIC" checked> public
             	<input type="radio" name="class" value="PRIVATE"> private
