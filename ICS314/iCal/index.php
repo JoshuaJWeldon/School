@@ -8,6 +8,7 @@
 </head>
     
 <body>
+<div class="container">
        
     <?php checkInputErrors(); ?>
     <div class="header"> 
@@ -15,49 +16,55 @@
     </div>
     <div class="body">
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-            New Event:
-            <input type="text" name="summery"> 
-                <span class="error"> * <?php echo $summeryErr; ?></span>
-            <br> 
-            Location:
-                <input type="text" name="location">
-                    <span class="error"> <?php echo $locationErr; ?></span>
-                <br>
-            StartTime: 
-                <input type="number" name="s_month" min="1"    max="12"   value="1" >/
-                <input type="number" name="s_day"   min="1"    max="31"   value="21">/
-                <input type="number" name="s_year"  min="2015" max="2017" value="2015"> 
-                <input type="number" name="s_hour"  min="1"    max="12"   value="2" >:
-                <input type="number" name="s_min"   min="0"    max="59"   value="30" >
-                <input type="radio" name="s_midday" value="am" checked>am
-                <input type="radio" name="s_midday" value="pm">pm 
+            <div class="bodypart">New Event:</div>
+            <div class="bodypart">
+                <input type="text" name="" placeholder="Summary"> 
+                	<span class="error"> * <?php echo $summeryErr; ?></span>
+            </div> 
+            <div class="bodypart">
+                <input type="text" name="" placeholder="Location">
+                	<span class="error"> <?php echo $locationErr; ?></span>
+            </div>
+            <div class="bodypart">
+                StartTime: 
+                <input type="number" name="s_month" placeholder= "Month" min="1"    max="12"  >/
+                <input type="number" name="s_day"   placeholder= "Day" min="1"    max="31"   >/
+                <input type="number" name="s_year"  placeholder= "Year" min="2015" max="2017" > 
+            	<input type="number" name="s_hour"  placeholder= "Hour" min="1"    max="12"    >:
+            	<input type="number" name="s_min"   placeholder= "Min" min="0"    max="59"    >
+            	<input type="radio" name="s_midday" value="am" checked>am
+            	<input type="radio" name="s_midday" value="pm">pm 
                     <span class="error"> * </span>
-                <br>
-            EndTime: 
-                <input type="number" name="e_month" min="1"    max="12"   value="1" >/
-                <input type="number" name="e_day"   min="1"    max="31"   value="21">/
-                <input type="number" name="e_year"  min="2015" max="2017" value="2015"> 
-                <input type="number" name="e_hour"  min="1"    max="12"   value="3" >:
-                <input type="number" name="e_min"   min="0"    max="59"   value="30" >
-                <input type="radio" name="e_midday" value="am" checked>am
-                <input type="radio" name="e_midday" value="pm">pm 
+            </div>
+            <div class="bodypart">
+            	EndTime: 
+                <input type="number" name="e_month" placeholder= "Month" min="1"    max="12"    >/
+           		<input type="number" name="e_day"   placeholder= "Day" min="1"    max="31"   >/
+            	<input type="number" name="e_year"  placeholder= "Year" min="2015" max="2017" > 
+            	<input type="number" name="e_hour"  placeholder= "Hour" min="1"    max="12"    >:
+            	<input type="number" name="e_min"   placeholder= "Min" min="0"    max="59"   >
+            	<input type="radio" name="e_midday" value="am" checked>am
+            	<input type="radio" name="e_midday" value="pm">pm 
                     <span class="error"> * <?php echo $timeErr; ?></span>
-                <br>
-            Priority: 
+            </div>
+            <div class="bodypart">
+            	Priority: 
                 1 <input type="range" name="priority" min="1" max="9"> 9
-                <br>
-            Type: 
-                <input type="radio" name="class" value="PUBLIC" checked> public
-                <input type="radio" name="class" value="PRIVATE">        private
-                <input type="radio" name="class" value="CONFIDENTIAL">   confidential
-                <br> 
+            </div>
+            <div class="bodypart">
+            	Type: <input type="radio" name="class" value="PUBLIC" checked> public
+            	<input type="radio" name="class" value="PRIVATE"> private
+            	<input type="radio" name="class" value="CONFIDENTIAL"> confidential
+            </div> 
         
-            <input type="submit" name="button" value="generate">            
+            <div class="bodypart">
+            	<input type="submit" name="button" value="generate">  
+            </div>               
         </form>
 
         <?php generateIcsText(); ?>
     
-    
+   
         <?php //!TODO: exportIcsText(); ?>
            
         <br>
@@ -66,8 +73,11 @@
         <br>
         <br>
         <br>
-        <p> * Please use Safari or Chrome as your browser for best results </p>
+        <div class="footer">
+        	<p> * Please use Safari or Chrome as your browser for best results </p>
+        </div>
     </div>
+</div>
 </body>
 
 </html>
