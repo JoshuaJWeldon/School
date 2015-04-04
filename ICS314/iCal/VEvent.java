@@ -1,4 +1,3 @@
-package ics;
 
 /**
  * This class represents an event for Calendar files.

@@ -1,5 +1,6 @@
 <?php include 'functions.php'; ?> 
 
+<<<<<<< HEAD
 <html>
     
 <head>
@@ -64,23 +65,28 @@
             	<input type="submit" name="button" value="generate">  
             </div>               
         </form>
+=======
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <?php headerText()?>
+    <title> iCal | Home </title>
+  </head>
+>>>>>>> origin/master
 
-        <?php generateIcsText(); ?>
+  <body>
+
+    <?php navBar(); ?>
     
-   
-        <?php //!TODO: exportIcsText(); ?>
-           
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div class="footer">
-        	<p> * Please use Safari or Chrome as your browser for best results </p>
-        </div>
+    <div class="container">
+        <h1> Home </h1>
+        <h3>Create: <small> Used to create iCal files.</small></h3>
+        <h3>FreeTime: <small> Used to find free time from a list of iCal Files.</small></h3>
     </div>
-</div>
-</body>
 
+  
+  
+    <?php endText(); ?>
+  </body>
 </html>
+

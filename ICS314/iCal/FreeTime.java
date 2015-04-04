@@ -1,5 +1,3 @@
-package ics;
-
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -12,7 +10,7 @@ public class FreeTime {
 	/**
 	 * A list of free time events.
 	 */
-	private ArrayList<VEvent> freeTime;
+	private static ArrayList<VEvent> freeTime;
 	
 	/**
 	 * A constructor method that initializes the free time list.
@@ -29,7 +27,13 @@ public class FreeTime {
 	 * @param targetPath The specified path.
 	 * @throws IOException
 	 */
-	public void findFreeTime(String dir, String targetPath) throws IOException{
+	public static void main(String[] args) throws IOException{
+		
+		String dir, targetPath;
+		
+		dir        = args[0];
+		targetPath = args[1];
+		
 		Path path = Paths.get(dir);
 		ICSFile schedule = new ICSFile();
 		
@@ -70,11 +74,8 @@ public class FreeTime {
 		}
 		
 		ICSFile free = new ICSFile();
-		for(int i = 0; i < freeTime.size(); i++){
-			free.calendarEvents = new ArrayList<VEvent>();
-			free.calendarEvents.add(freeTime.get(i));
-			free.writeICSFile(targetPath + (i + 1) + ".ics");
-		}
+		free.calendarEvents = freeTime;
+		free.writeICSFile(targetPath);
 		
 		} catch (IOException x) {
 		    System.err.println(x);
