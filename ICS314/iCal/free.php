@@ -21,7 +21,7 @@
             <p>
                 Select image to upload:
                 <input type="file" name="icsFile" id="icsFile">
-                <input type="submit" value="Upload Image" name="submit">
+                <input type="submit" value="Upload" name="submit">
                 <span class="error"> <?php echo $fileErr; ?> </span>
             </p>
         </form>
