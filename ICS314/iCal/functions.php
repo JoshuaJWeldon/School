@@ -37,7 +37,12 @@
             $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
             // Check if file already exists
-            if (file_exists($target_file)) {
+            if(basename($_FILES["icsFile"]["name"]) == ""){
+                $fileErr = "Sorry, must choose a file.";
+                $uploadOk = 0;
+            }
+            
+            else if (file_exists($target_file)) {
                 $fileErr = "Sorry, file already exists.";
                 $uploadOk = 0;
             }
@@ -73,7 +78,7 @@
 
                 if ($entry != "." && $entry != ".." && $entry != ".DS_Store") {
                     
-                    ?> <a href="<?php echo $entry; ?>"> <?php echo $entry; ?> </a> <br> <?php
+                    ?> <a href="uploads/<?php echo $entry; ?>"> <?php echo $entry; ?> </a> <br> <?php
                         
                     $uploadCount++;
                 }
@@ -87,7 +92,7 @@
         
         $output = "";
         
-        array_map('unlink', glob("downloads/*.ics"));
+        //array_map('unlink', glob("downloads/*.ics"));
         
         exec("java FreeTime uploads/ downloads/file");
         
@@ -98,7 +103,7 @@
 
                 if ($entry != "." && $entry != ".." && $entry != ".DS_Store") {
                     
-                    ?> <a href="<?php echo $entry; ?>"> <?php echo $entry; ?> </a> <br> <?php
+                    ?> <a href="downloads/<?php echo $entry; ?>"> <?php echo $entry; ?> </a> <br> <?php
                     
                 }
             }
