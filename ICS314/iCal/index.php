@@ -50,8 +50,8 @@
             <div class="bodypart">
             	Priority: 
             	<form>
-    				<input type="range" name="amountRange" min="1" max="9" value="0" oninput="this.form.amountInput.value=this.value" />
-    				<input type="number" name="amountInput" min="1" max="9" value="0" oninput="this.form.amountRange.value=this.value" />
+    				<input type="range" name="priority" min="1" max="9" value="0" oninput="this.form.display.value=this.value" />
+    				<input type="number" name="display" min="1" max="9" value="0" oninput="this.form.priority.value=this.value" />
     			</form>
     		</div>
             <div class="bodypart">
