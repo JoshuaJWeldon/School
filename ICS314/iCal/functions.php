@@ -5,6 +5,159 @@
     
     $summery = $location = $starttime = $endtime = $priority = $class = "";
     $summeryErr = $locationErr = $timeErr = $priorityErr = $classErr = "";
+    
+    $fileErr = $fileOut = "";
+    
+    $uploadCount = 0;
+    
+    
+    function headerText(){
+        ?>
+        <link rel='shortcut icon' type='image/x-icon' href="favicon.ico">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="style.css" rel="stylesheet">
+        <?php
+    }
+    
+    function upload(){
+        
+        global $_FILES, $_POST, $_SERVER;
+        global $fileErr;
+        
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            
+            $target_dir    = "uploads/";
+            $target_file   = $target_dir . basename($_FILES["icsFile"]["name"]);
+            $uploadOk      = 1;
+            $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+            // Check if file already exists
+            if (file_exists($target_file)) {
+                $fileErr = "Sorry, file already exists.";
+                $uploadOk = 0;
+            }
+            // Check file size
+            else if ($_FILES["icsFile"]["size"] > 500000) {
+                $fileErr = "Sorry, your file is too large.";
+                $uploadOk = 0;
+            }
+
+            // Allow certain file formats
+            else if($imageFileType != "ics") {
+                $fileErr = "Sorry, only ICS files are allowed.";
+                $uploadOk = 0;
+            }
+
+            // Check if $uploadOk is set to 0 by an error
+            if ($uploadOk == 1) {
+                
+                if (!move_uploaded_file($_FILES["icsFile"]["tmp_name"], $target_file)) {
+                    $fileErr = "Sorry, there was an error uploading your file.";
+                } 
+            }  
+        }
+    }
+    
+    function uploadList(){
+        
+        global $uploadCount;
+        
+        if ($handle = opendir('uploads/')) {
+
+            while (false !== ($entry = readdir($handle))) {
+
+                if ($entry != "." && $entry != ".." && $entry != ".DS_Store") {
+                    
+                    ?> <a href="<?php echo $entry; ?>"> <?php echo $entry; ?> </a> <br> <?php
+                        
+                    $uploadCount++;
+                }
+            }
+
+            closedir($handle);
+        }
+    }
+    
+    function generateFreeTime(){
+        
+        $output = "";
+        
+        array_map('unlink', glob("downloads/*.ics"));
+        
+        exec("java FreeTime uploads/ downloads/");
+        
+        
+        if ($handle = opendir('downloads/')) {
+
+            while (false !== ($entry = readdir($handle))) {
+
+                if ($entry != "." && $entry != ".." && $entry != ".DS_Store") {
+                    
+                    ?> <a href="<?php echo $entry; ?>"> <?php echo $entry; ?> </a> <br> <?php
+                    
+                }
+            }
+
+            closedir($handle);
+        }
+        
+        
+    }
+    
+    function endText(){
+        ?>
+        
+        <div class="container">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <p> * Please use Safari or Chrome as your browser for best results </p>
+        </div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        
+        <?php
+    }
+    
+    function navBar(){
+        
+        ?>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.php"> iCal </a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="index.php">Home</a></li>
+                        <li><a href="create.php">P1:Create</a></li>
+                        <li><a href="free.php">P2:FreeTime</a></li>
+                        <li><a href="test.php">TEST</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+
+        <br>
+        <br>
+        <br> 
+        <?php
+    }
 
     function checkInputErrors(){
 
@@ -134,9 +287,24 @@
                 $endtime = $endtime . $_POST["e_min"] . "00";
             }
                        
-            // save priority
-            
-            $priority = $_POST["priority"];
+            // test priority
+            if (!empty($_POST["priority"])) {
+  
+                $priority = $_POST["priority"];
+
+                if(empty($priority)){
+                    $priority = 0;
+                }  
+                
+                if (!is_numeric($priority)) {
+                    $priority = 0;
+                }
+                 	
+                unset($_POST["priority"]);
+            }
+            else{
+                $priority = 0;
+            }
             
             // save class
             
@@ -155,7 +323,7 @@
         global $summery, $location, $starttime, $endtime, $priority, $class;
         
         
-        if(!empty($summery)): ?>
+        if(!empty($summery)){ ?>
             
             <br>
             <br>
@@ -204,21 +372,8 @@
             fwrite($file, $icsText);
             fclose($file);
             
-            ?>
+        }
         
-        <?php endif;
-        
-    }  
-    
-    function exportIcsText(){
-        //!TODO: write export
-        
-        ?>
-            <form>
-                <input type="button" value="export" name="export">
-            </form>
-        
-        <?php
     }
     
     function test_input($data) {
