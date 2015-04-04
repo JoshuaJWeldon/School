@@ -89,7 +89,7 @@
         
         array_map('unlink', glob("downloads/*.ics"));
         
-        exec("java FreeTime uploads/ downloads/");
+        exec("java FreeTime uploads/ downloads/file");
         
         
         if ($handle = opendir('downloads/')) {
