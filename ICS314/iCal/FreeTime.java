@@ -10,14 +10,8 @@ public class FreeTime {
 	/**
 	 * A list of free time events.
 	 */
-	private static ArrayList<VEvent> freeTime;
+	private static ArrayList<VEvent> freeTime = new ArrayList<VEvent>();
 	
-	/**
-	 * A constructor method that initializes the free time list.
-	 */
-	FreeTime(){
-		freeTime = new ArrayList<VEvent>();
-	}
 	
 	/**
 	 * A method that takes all the .ics files in the specified directory and calculates the free time events between the events found.
