@@ -74,8 +74,11 @@ public class FreeTime {
 		}
 		
 		ICSFile free = new ICSFile();
-		free.calendarEvents = freeTime;
-		free.writeICSFile(targetPath);
+		for(int i = 0; i < freeTime.size(); i++){
+			free.calendarEvents = new ArrayList<VEvent>();
+			free.calendarEvents.add(freeTime.get(i));
+			free.writeICSFile(targetPath + (i + 1) + ".ics");
+		}
 		
 		} catch (IOException x) {
 		    System.err.println(x);
