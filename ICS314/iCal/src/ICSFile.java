@@ -1,3 +1,5 @@
+package ics;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -30,18 +32,22 @@ public class ICSFile {
 	/**
 	 * An ArrayList containing objects of the VEvent class, which is used to store information about a single event.
 	 */
-	private ArrayList<VEvent> calendarEvents; 
+	private ArrayList<VEvent> calendarevents; 
 	
 	/**
 	 * A constructor method that sets the time zone to Pacific/Honolulu.
 	 */
 	public ICSFile(){
-		calendarEvents = new ArrayList<VEvent>();
+		calendarevents = new ArrayList<VEvent>();
 		timezone = "Pacific/Honolulu";
 	}
 	
+	/**
+	 * Sorts the events in the current instance.
+	 * Sort is based on start times and dates.
+	 */
 	public void sortEvents(){
-		Collections.sort(calendarEvents);
+		Collections.sort(calendarevents);
 	}
 	
 	/**
@@ -49,20 +55,55 @@ public class ICSFile {
 	 * @param tz the desired timezone
 	 */
 	public ICSFile(String tz){
-		calendarEvents = new ArrayList<VEvent>();
+		calendarevents = new ArrayList<VEvent>();
 		timezone = tz;
 	}
 	
+	/**
+	 * Removes the event at the specified position.
+	 * Returns null if index is out of range.
+	 * @param i The index of the specified event.
+	 * @return Event removed if index is out of range then null.
+	 */
+	public VEvent removeEvent(int i){
+		if(i < calendarevents.size()){
+			VEvent temp = calendarevents.get(i);
+			calendarevents.remove(i);
+			return temp;
+		}
+		else return null;
+	}
+	
+	/**
+	 * Clears all of the events stored.
+	 */
+	public void clearEvents(){
+		calendarevents = new ArrayList<VEvent>();
+	}
+	
+	/**
+	 * Adds an event object.
+	 * @param e the event to be added.
+	 */
 	public void addEvent(VEvent e){
-		calendarEvents.add(e);
+		calendarevents.add(e);
 	}
 	
+	/**
+	 * Returns an event specified by the index parameter.
+	 * @param i Index of the event.
+	 * @return The specified event.
+	 */
 	public VEvent getEvent(int i){
-		return calendarEvents.get(i);
+		return calendarevents.get(i);
 	}
 	
+	/**
+	 * Returns the amount of events stored in the current instance.
+	 * @return The number of events.
+	 */
 	public int numOfEvents(){
-		return calendarEvents.size();
+		return calendarevents.size();
 	}
 	
 	/**
@@ -114,8 +155,8 @@ public class ICSFile {
 				switch(data[0]){
 				case "BEGIN": 
 					if(!data[1].equals("VCALENDAR")){
-						calendarEvents.add(new VEvent());
-						calendarEvents.get((calendarEvents.size() - 1)).setType(data[1]);
+						calendarevents.add(new VEvent());
+						calendarevents.get((calendarevents.size() - 1)).setType(data[1]);
 					}
 					else{
 						//do something?
@@ -128,22 +169,22 @@ public class ICSFile {
 					timezone = data[1];
 					break;
 				case "CLASS":
-					calendarEvents.get((calendarEvents.size() - 1)).setClassification(data[1]);
+					calendarevents.get((calendarevents.size() - 1)).setClassification(data[1]);
 					break;
 				case "DTSTART":
-					calendarEvents.get((calendarEvents.size() - 1)).setDateStart(data[1]);
+					calendarevents.get((calendarevents.size() - 1)).setDateStart(data[1]);
 					break;
 				case "DTEND":
-					calendarEvents.get((calendarEvents.size() - 1)).setDateEnd(data[1]);
+					calendarevents.get((calendarevents.size() - 1)).setDateEnd(data[1]);
 					break;
 				case "LOCATION":
-					calendarEvents.get((calendarEvents.size() - 1)).setLocation(data[1]);
+					calendarevents.get((calendarevents.size() - 1)).setLocation(data[1]);
 					break;
 				case "PRIORITY":
-					calendarEvents.get((calendarEvents.size() - 1)).setPriority(Integer.parseInt(data[1]));
+					calendarevents.get((calendarevents.size() - 1)).setPriority(Integer.parseInt(data[1]));
 					break;
 				case "SUMMARY":
-					calendarEvents.get((calendarEvents.size() - 1)).setSummary(data[1]);
+					calendarevents.get((calendarevents.size() - 1)).setSummary(data[1]);
 					break;
 				case "END": //do something?
 					break;
@@ -170,7 +211,7 @@ public class ICSFile {
 		fWriter.write(timezone);
 		fWriter.newLine();
 		
-		for(VEvent event: calendarEvents){
+		for(VEvent event: calendarevents){
 			fWriter.newLine();
 			fWriter.write("BEGIN:");
 			fWriter.write(event.getType());

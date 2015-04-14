@@ -1,3 +1,4 @@
+package ics;
 
 /**
  * This class represents an event for Calendar files.
@@ -147,18 +148,30 @@ public class VEvent implements Comparable<VEvent>{
 	
 	/**
 	 * Accessor for time the event starts.
-	 * Format is "T"HHMMSS"Z".
-	 * @return the start time
+	 * Format is YYYYMMDD"T"HHMMSS"Z".
+	 * @return The start date and time.
 	 */
 	public String getDateTimeStart(){
 		return dateStart;
 	}
 	
+	/**
+	 * A method that returns the start date of the event.
+	 * Format is YYYYMMDD.
+	 * @return String representation of date.
+	 */
 	public String getDateStart(){
 		return dateStart.substring(0, 8);
 	}
-	public int TimeToIntStart(){
-		return Integer.parseInt(dateStart.substring(9));
+	
+	/**
+	 * A method that returns the start time of the event.
+	 * Represented as an int instead of string.
+	 * Format is HHMMSS.
+	 * @return The start time of the event.
+	 */
+	public int getTimeStart(){
+		return Integer.parseInt(dateStart.substring(9, 15));
 	}
 	
 	/**
@@ -181,13 +194,24 @@ public class VEvent implements Comparable<VEvent>{
 		return dateEnd;
 	}
 	
+	/**
+	 * A method that returns the start date of the event.
+	 * Format is YYYYMMDD.
+	 * @return String representation of the date.
+	 */
 	public String getDateEnd(){
 		return dateEnd.substring(0, 8);
 	}
-	public int TimeToIntEnd(){
-		return Integer.parseInt(dateEnd.substring(9));
-	}
 	
+	/**
+	 * A method that returns the start time of the event.
+	 * Represented as an int instead of a string.
+	 * Format is HHMMSS.
+	 * @return The end time of an event.
+	 */
+	public int getTimeEnd(){
+		return Integer.parseInt(dateEnd.substring(9, 15));
+	}
 	
 	/**
 	 * Sets the end time for an event.
