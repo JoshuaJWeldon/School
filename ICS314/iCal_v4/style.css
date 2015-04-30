@@ -1,0 +1,50 @@
+body{
+    background: url("Background.jpg");
+}
+
+h1{
+    color: #429dff;
+}
+
+h2{
+    color: #3c91eb
+}
+
+h3{
+    color: #2f79c8;
+}
+
+p{
+    color: #2b71bb;
+}
+
+a{
+    color: #215388;
+    font-weight: bold;
+}
+
+a:hover {
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.error {
+    color: #f74949;
+}
+
+.personA {
+    color: #4cbc7b;
+}
+
+.personB {
+    color: #d04e4e;
+}
+
+.footer {
+  position:fixed;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 5vh;
+  background-color: #f5f5f5;
+}
