@@ -111,6 +111,9 @@ public class ICSFile {
 			
 			while((line = fReader.readLine()) != null){
 				data = line.split(":", 2);
+				if(data[0].length() > 5 && data[0].substring(0,2).toUpperCase().equals("DT")){
+					data[0] = data[1].split(";", 2)[0];
+				}
 				switch(data[0]){
 				case "BEGIN": 
 					if(!data[1].equals("VCALENDAR")){
@@ -176,12 +179,18 @@ public class ICSFile {
 			fWriter.write(event.getType());
 			fWriter.newLine();
 			if(event.getDateTimeStart() != null){
-				fWriter.write("DTSTART:");
+				fWriter.write("DTSTART");
+				fWriter.write("; TZID = \"");
+				fWriter.write(timezone);
+				fWriter.write("\":");
 				fWriter.write(event.getDateTimeStart());
 				fWriter.newLine();
 			}
 			if(event.getDateTimeEnd() != null){
-				fWriter.write("DTEND:");
+				fWriter.write("DTEND ");
+				fWriter.write("; TZID = \"");
+				fWriter.write(timezone);
+				fWriter.write("\":");
 				fWriter.write(event.getDateTimeEnd());
 				fWriter.newLine();
 			}
