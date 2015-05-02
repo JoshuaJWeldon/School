@@ -1,10 +1,9 @@
+package Cal;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class FreeTime {
 
@@ -32,9 +31,21 @@ public class FreeTime {
 		
 		schedule = new ICSFile();
 		
+		String timezone = null;
+		
 		DirectoryStream<Path> stream = Files.newDirectoryStream(path, "*.{ics}");
 		for (Path entry: stream) {
-			schedule.readICSFile(entry.toString());
+			if(schedule.numOfEvents() == 0){
+				schedule.readICSFile(entry.toString());
+				timezone = schedule.getTimeZone();
+			}
+			else{
+				schedule.readICSFile(entry.toString());
+				if(!timezone.equals(schedule.getTimeZone())){
+					System.out.println("All events must be in the same time zone.");
+					System.exit(1);
+				}
+			}
 		}
 	
 		freetimes = new ICSFile(schedule.getTimeZone());
